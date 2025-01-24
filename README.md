@@ -142,16 +142,20 @@ generated_text = m.generate(inputs, max_new_tokens=50)[0]
 print(generated_text)
 
 # 输出
+'''
 Epochs: 0    lr: 0.001    train_loss: 10.9810    eval_loss: 9.3945
 Epochs: 500    lr: 0.001    train_loss: 2.4500    eval_loss: 5.0497
 Epochs: 999    lr: 0.001    train_loss: 0.4665    eval_loss: 3.5088
+'''
 
+'''
 love me,
 Every year me,
 I got a man,
 If you were both first time,
 It might not supposed to be taking a parked car I'm sitting here, man is old friend by the field in love,
 Come on
+'''
 ```
 
 ---
