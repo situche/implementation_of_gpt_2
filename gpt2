@@ -32,7 +32,7 @@ class Dataloader:
         end_pos = self.current_position + b * c + 1  # 4097
         add_data = -1
         if end_pos > len(self.tokens):  # 结束位置超过总长度时  4097>156
-            add_data = end_pos - len(self.tokens)  # 计算超出量，-1以适应索引  4097-156-1  3940
+            add_data = end_pos - len(self.tokens)  # 计算超出量
             end_pos = len(self.tokens)  # 重新设定结束位置  155
         
         d = self.tokens[strat_pos:end_pos]  # d = [0, b * c - 1]  0, 155 = 155  shape=(155,)
@@ -51,7 +51,7 @@ eval_batch_size = 8  # 测试集批大小
 context_length = 256  # seq_len 每一批次的序列长度，此处为上下文长度
 train_split = 0.7  # 用于训练的总数据百分比，也就是8成数据用于训练，剩下的用于测试
 
-n_data = len(data)  # 数据集大小   232724
+n_data = len(data)  # 数据集大小
 train_data = data[:int(n_data * train_split)]
 eval_data = data[int(n_data * train_split):]
 print(f'{n_data}\n{train_data}\n{eval_data}')
