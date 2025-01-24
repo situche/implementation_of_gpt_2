@@ -140,9 +140,6 @@ for ep in range(epochs):
 inputs = torch.tensor(tokenizer.encode('love'), dtype=torch.long, device=device).unsqueeze(0)
 generated_text = m.generate(inputs, max_new_tokens=50)[0]
 print(generated_text)
-```
-
----
 
 # 输出
 Epochs: 0    lr: 0.001    train_loss: 10.9810    eval_loss: 9.3945
@@ -155,6 +152,9 @@ I got a man,
 If you were both first time,
 It might not supposed to be taking a parked car I'm sitting here, man is old friend by the field in love,
 Come on
+```
+
+---
 
 ## 总结
 这个实现提供了一个简化的 GPT 模型，支持文本的训练和生成。模型利用 **多头自注意力**、**位置编码** 和 **交叉熵损失** 进行训练，并且支持基于输入文本生成新的内容。
