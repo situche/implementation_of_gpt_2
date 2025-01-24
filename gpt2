@@ -223,5 +223,10 @@ for ep in range(epochs):
             xvb, yvb = eval_loader.get_batch()
             _, e_loss = m(xvb, yvb)
 
-            print(f'Epochs: {ep}\nlr: {lr}\ntrain_loss: {loss:.4f}\neval_loss: {e_loss:.4f}')
+            print(f'Epochs: {ep}\tlr: {lr}\ttrain_loss: {loss:.4f}\teval_loss: {e_loss:.4f}')
         m.train()
+
+with torch.no_grad():
+    inputs = torch.tensor(tokenizer.encode('love'), dtype=torch.long, device=device).unsqueeze(0)
+    generated_text = m.generate(inputs, max_new_tokens=50)[0]
+    print(generated_text)
