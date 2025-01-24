@@ -119,7 +119,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = GPT(vocab_size, d_model, num_heads, n_layers).to(device)
 
 # 训练
-epochs = 5000
+epochs = 1000
+eval_step = 500
 for ep in range(epochs):
     xb, yb = train_loader.get_batch()  # 获取训练数据
     logits, loss = model(xb, yb)  # 前向传播
@@ -132,16 +133,28 @@ for ep in range(epochs):
         with torch.no_grad():
             xvb, yvb = eval_loader.get_batch()  # 获取验证数据
             _, e_loss = model(xvb, yvb)
-            print(f'Epoch: {ep}, train_loss: {loss}, eval_loss: {e_loss}')
+            print(f'Epoch: {ep}\tlr:{lr}\ttrain_loss: {loss}\teval_loss: {e_loss}')
         model.train()
 
 # 文本生成
-inputs = torch.tensor([[1]], device=device)
-generated_text = model.generate(inputs, max_new_tokens=50)
+inputs = torch.tensor(tokenizer.encode('love'), dtype=torch.long, device=device).unsqueeze(0)
+generated_text = m.generate(inputs, max_new_tokens=50)[0]
 print(generated_text)
 ```
 
 ---
+
+# 输出
+Epochs: 0    lr: 0.001    train_loss: 10.9810    eval_loss: 9.3945
+Epochs: 500    lr: 0.001    train_loss: 2.4500    eval_loss: 5.0497
+Epochs: 999    lr: 0.001    train_loss: 0.4665    eval_loss: 3.5088
+
+love me,
+Every year me,
+I got a man,
+If you were both first time,
+It might not supposed to be taking a parked car I'm sitting here, man is old friend by the field in love,
+Come on
 
 ## 总结
 这个实现提供了一个简化的 GPT 模型，支持文本的训练和生成。模型利用 **多头自注意力**、**位置编码** 和 **交叉熵损失** 进行训练，并且支持基于输入文本生成新的内容。
